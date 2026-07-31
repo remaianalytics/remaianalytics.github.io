@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://remaihq.com/sitemap.xml
