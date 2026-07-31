@@ -4,783 +4,668 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>REMAI Analytics | TikTok Shop Profit Analytics</title>
-
-  <meta
-    name="description"
-    content="REMAI Analytics provides profit tracking, finance reconciliation, SKU cost management and multi-store analytics for TikTok Shop sellers."
-  >
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      color: #0f172a;
-      background: #ffffff;
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .container {
-      width: min(1120px, 90%);
-      margin: 0 auto;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(255, 255, 255, 0.95);
-      border-bottom: 1px solid #e2e8f0;
-      backdrop-filter: blur(12px);
-    }
-
-    nav {
-      min-height: 72px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 21px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-    }
-
-    .logo {
-      width: 38px;
-      height: 38px;
-      display: grid;
-      place-items: center;
-      border-radius: 11px;
-      color: #ffffff;
-      font-weight: 900;
-      background: linear-gradient(135deg, #0f172a, #14b8a6);
-      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.16);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-      color: #475569;
-      font-size: 15px;
-      font-weight: 600;
-    }
-
-    .nav-links a:hover {
-      color: #0f172a;
-    }
-
-    .nav-button {
-      padding: 11px 18px;
-      color: #ffffff !important;
-      background: #0f172a;
-      border-radius: 9px;
-    }
-
-    .hero {
-      padding: 100px 0 80px;
-      background:
-        radial-gradient(circle at 90% 10%, rgba(20, 184, 166, 0.15), transparent 30%),
-        radial-gradient(circle at 10% 40%, rgba(59, 130, 246, 0.10), transparent 30%);
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      align-items: center;
-      gap: 64px;
-    }
-
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      padding: 7px 13px;
-      margin-bottom: 22px;
-      color: #0f766e;
-      background: #ccfbf1;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: 0.4px;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      max-width: 720px;
-      font-size: clamp(42px, 6vw, 70px);
-      line-height: 1.05;
-      letter-spacing: -2.5px;
-    }
-
-    .hero h1 span {
-      color: #0f766e;
-    }
-
-    .hero-text {
-      max-width: 650px;
-      margin: 26px 0 32px;
-      color: #475569;
-      font-size: 19px;
-    }
-
-    .hero-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-    }
-
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 48px;
-      padding: 0 22px;
-      border-radius: 10px;
-      font-weight: 700;
-      transition: 0.2s ease;
-    }
-
-    .button-primary {
-      color: #ffffff;
-      background: #0f172a;
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.16);
-    }
-
-    .button-secondary {
-      background: #ffffff;
-      border: 1px solid #cbd5e1;
-    }
-
-    .button:hover {
-      transform: translateY(-2px);
-    }
-
-    .dashboard {
-      overflow: hidden;
-      padding: 18px;
-      background: #0f172a;
-      border: 1px solid #334155;
-      border-radius: 24px;
-      box-shadow: 0 30px 70px rgba(15, 23, 42, 0.24);
-    }
-
-    .dashboard-top {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      margin-bottom: 18px;
-    }
-
-    .dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #64748b;
-    }
-
-    .dashboard-title {
-      margin-left: 8px;
-      color: #cbd5e1;
-      font-size: 13px;
-    }
-
-    .dashboard-body {
-      padding: 22px;
-      background: #f8fafc;
-      border-radius: 15px;
-    }
-
-    .dashboard-heading {
-      margin-bottom: 18px;
-      font-size: 20px;
-      font-weight: 800;
-    }
-
-    .metric-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-
-    .metric {
-      padding: 17px;
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-    }
-
-    .metric-label {
-      color: #64748b;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .metric-value {
-      margin-top: 7px;
-      font-size: 21px;
-      font-weight: 850;
-    }
-
-    .chart {
-      display: flex;
-      align-items: flex-end;
-      gap: 8px;
-      height: 120px;
-      margin-top: 15px;
-      padding: 16px;
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-    }
-
-    .bar {
-      flex: 1;
-      min-width: 10px;
-      background: linear-gradient(180deg, #14b8a6, #0f766e);
-      border-radius: 5px 5px 2px 2px;
-    }
-
-    section {
-      padding: 92px 0;
-    }
-
-    .section-light {
-      background: #f8fafc;
-    }
-
-    .section-heading {
-      max-width: 720px;
-      margin: 0 auto 48px;
-      text-align: center;
-    }
-
-    .section-heading p {
-      margin-top: 14px;
-      color: #64748b;
-      font-size: 17px;
-    }
-
-    h2 {
-      font-size: clamp(32px, 4vw, 48px);
-      line-height: 1.15;
-      letter-spacing: -1.5px;
-    }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-    }
-
-    .feature-card {
-      padding: 28px 24px;
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 16px;
-      transition: 0.2s ease;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
-    }
-
-    .feature-icon {
-      width: 46px;
-      height: 46px;
-      display: grid;
-      place-items: center;
-      margin-bottom: 20px;
-      color: #ffffff;
-      background: #0f766e;
-      border-radius: 12px;
-      font-size: 21px;
-    }
-
-    .feature-card h3 {
-      margin-bottom: 10px;
-      font-size: 19px;
-    }
-
-    .feature-card p {
-      color: #64748b;
-      font-size: 15px;
-    }
-
-    .product-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      gap: 72px;
-    }
-
-    .product-content p {
-      margin: 20px 0;
-      color: #64748b;
-      font-size: 17px;
-    }
-
-    .check-list {
-      display: grid;
-      gap: 15px;
-      margin-top: 28px;
-    }
-
-    .check-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 700;
-    }
-
-    .check {
-      width: 24px;
-      height: 24px;
-      display: grid;
-      place-items: center;
-      flex-shrink: 0;
-      color: #ffffff;
-      background: #14b8a6;
-      border-radius: 50%;
-      font-size: 13px;
-    }
-
-    .product-panel {
-      padding: 30px;
-      color: #ffffff;
-      background: linear-gradient(145deg, #0f172a, #1e293b);
-      border-radius: 22px;
-      box-shadow: 0 25px 60px rgba(15, 23, 42, 0.22);
-    }
-
-    .product-panel h3 {
-      margin-bottom: 20px;
-      font-size: 24px;
-    }
-
-    .panel-row {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 15px 0;
-      color: #cbd5e1;
-      border-bottom: 1px solid #334155;
-    }
-
-    .panel-row:last-child {
-      border-bottom: none;
-    }
-
-    .panel-row strong {
-      color: #5eead4;
-    }
-
-    .about {
-      text-align: center;
-    }
-
-    .about p {
-      max-width: 780px;
-      margin: 20px auto 0;
-      color: #64748b;
-      font-size: 18px;
-    }
-
-    .contact-box {
-      padding: 58px;
-      text-align: center;
-      color: #ffffff;
-      background: linear-gradient(135deg, #0f172a, #134e4a);
-      border-radius: 25px;
-    }
-
-    .contact-box p {
-      max-width: 680px;
-      margin: 18px auto 30px;
-      color: #cbd5e1;
-    }
-
-    .contact-box .button {
-      color: #0f172a;
-      background: #ffffff;
-    }
-
-    footer {
-      padding: 42px 0;
-      color: #64748b;
-      background: #020617;
-    }
-
-    .footer-grid {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-    }
-
-    .footer-brand {
-      color: #ffffff;
-      font-weight: 800;
-    }
-
-    .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 22px;
-    }
-
-    .footer-links a:hover {
-      color: #ffffff;
-    }
-
-    @media (max-width: 900px) {
-      .hero-grid,
-      .product-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .feature-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .nav-links a:not(.nav-button) {
-        display: none;
-      }
-
-      .hero {
-        padding-top: 75px;
-      }
-    }
-
-    @media (max-width: 600px) {
-      .feature-grid,
-      .metric-grid {
-        grid-template-columns: 1fr;
-      }
-
-      section {
-        padding: 70px 0;
-      }
-
-      h1 {
-        letter-spacing: -1.5px;
-      }
-
-      .hero-text {
-        font-size: 17px;
-      }
-
-      .contact-box {
-        padding: 40px 24px;
-      }
-
-      .footer-grid {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
-  </style>
+  <title>REMAI HQ | Profit Intelligence for Modern Commerce</title>
+  <meta name="description" content="REMAI HQ helps e-commerce teams understand true profit by connecting orders, settlements, advertising costs, platform fees, creator commissions, product costs and refunds.">
+
+  <link rel="canonical" href="https://remaihq.com/">
+  <meta name="theme-color" content="#FAFAFA">
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+
+  <meta property="og:title" content="REMAI HQ | Profit Intelligence for Modern Commerce">
+  <meta property="og:description" content="REMAI HQ helps e-commerce teams understand true profit by connecting orders, settlements, advertising costs, platform fees, creator commissions, product costs and refunds.">
+  <meta property="og:url" content="https://remaihq.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="REMAI HQ">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="REMAI HQ | Profit Intelligence for Modern Commerce">
+  <meta name="twitter:description" content="REMAI HQ helps e-commerce teams understand true profit by connecting orders, settlements, advertising costs, platform fees, creator commissions, product costs and refunds.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "REMAI HQ",
+    "url": "https://remaihq.com",
+    "email": "developer@remaihq.com"
+  }
+  </script>
 </head>
-
 <body>
 
-  <header>
-    <div class="container">
-      <nav>
-        <a href="#" class="brand">
-          <span class="logo">R</span>
-          <span>REMAI Analytics</span>
-        </a>
+  <header class="site-header">
+    <div class="container navbar">
+      <a href="#" class="brand" aria-label="REMAI HQ home">
+        <span class="brand-mark" aria-hidden="true"><span>R</span></span>
+        <span><span class="brand-word-remai">REMAI</span> <span class="brand-word-hq">HQ</span></span>
+      </a>
 
-        <div class="nav-links">
-          <a href="#features">Features</a>
-          <a href="#product">Product</a>
-          <a href="#about">About</a>
-          <a href="#contact" class="nav-button">Contact</a>
-        </div>
+      <nav class="nav-links" data-nav-links data-open="false" aria-label="Primary">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#security">Security</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="#contact" class="btn btn-primary btn-sm">Open Platform</a>
       </nav>
+
+      <button class="nav-toggle" data-nav-toggle type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true">
+          <path d="M3 6h18M3 12h18M3 18h18"/>
+        </svg>
+      </button>
     </div>
   </header>
 
   <main>
 
+    <!-- Hero -->
     <section class="hero">
       <div class="container hero-grid">
-
-        <div>
-          <div class="tag">TikTok Shop Analytics</div>
-
-          <h1>
-            Track real profit.
-            <span>Make smarter decisions.</span>
-          </h1>
-
-          <p class="hero-text">
-            REMAI Analytics helps TikTok Shop sellers manage revenue,
-            product costs, finance settlements and store performance
-            from one unified dashboard.
+        <div class="hero-copy">
+          <span class="eyebrow">Profit Intelligence for Modern Commerce</span>
+          <h1>Make Every Order Profitable.</h1>
+          <p class="lede">
+            REMAI unifies orders, settlements, advertising costs, platform fees, creator commissions,
+            product costs and refunds—so e-commerce teams can understand true profit and make better
+            operating decisions.
           </p>
-
-          <div class="hero-buttons">
-            <a href="#product" class="button button-primary">
-              Explore the Platform
-            </a>
-
-            <a href="#contact" class="button button-secondary">
-              Contact Us
-            </a>
+          <div class="hero-actions">
+            <a href="#product" class="btn btn-primary">Explore the Platform</a>
+            <a href="#features" class="btn btn-secondary">View Capabilities</a>
           </div>
+          <p class="hero-note">Built for data-driven e-commerce operations.</p>
         </div>
 
-        <div class="dashboard">
-          <div class="dashboard-top">
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-            <span class="dashboard-title">REMAI Profit Tracker</span>
+        <div class="dashboard-card" role="img" aria-label="Example REMAI profit dashboard with demo figures" data-animate>
+          <div class="dashboard-chrome">
+            <div class="dashboard-dots"><span></span><span></span><span></span></div>
+            <span class="dashboard-tag">Demo overview</span>
           </div>
-
-          <div class="dashboard-body">
-            <div class="dashboard-heading">Business Overview</div>
-
+          <div class="dashboard-panel">
+            <div class="dashboard-panel-title">Business Overview</div>
             <div class="metric-grid">
-              <div class="metric">
-                <div class="metric-label">REVENUE</div>
-                <div class="metric-value">₱128,450</div>
+              <div class="metric-tile">
+                <div class="metric-label">Net Profit</div>
+                <div class="metric-value">₱128,420</div>
+                <span class="metric-trend is-good">
+                  <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8 8 2M8 2H3M8 2v5"/></svg>
+                  18.2%
+                </span>
               </div>
-
-              <div class="metric">
-                <div class="metric-label">ORDERS</div>
-                <div class="metric-value">1,284</div>
+              <div class="metric-tile">
+                <div class="metric-label">Revenue</div>
+                <div class="metric-value">₱486,930</div>
+                <span class="metric-trend is-good">
+                  <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8 8 2M8 2H3M8 2v5"/></svg>
+                  12.8%
+                </span>
               </div>
-
-              <div class="metric">
-                <div class="metric-label">ESTIMATED PROFIT</div>
-                <div class="metric-value">₱31,820</div>
+              <div class="metric-tile">
+                <div class="metric-label">Advertising Cost</div>
+                <div class="metric-value">₱62,800</div>
+                <span class="metric-period">Today</span>
               </div>
-
-              <div class="metric">
-                <div class="metric-label">COST COVERAGE</div>
-                <div class="metric-value">100%</div>
+              <div class="metric-tile">
+                <div class="metric-label">Platform Fees</div>
+                <div class="metric-value">₱48,320</div>
+                <span class="metric-trend is-bad">
+                  <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8 8 2M8 2H3M8 2v5"/></svg>
+                  2.1%
+                </span>
+              </div>
+              <div class="metric-tile">
+                <div class="metric-label">Creator Commission</div>
+                <div class="metric-value">₱26,440</div>
+                <span class="metric-period">This Week</span>
+              </div>
+              <div class="metric-tile">
+                <div class="metric-label">Refund Rate</div>
+                <div class="metric-value">3.8%</div>
+                <span class="metric-trend is-good">
+                  <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 4 8 10M8 10H3M8 10V5"/></svg>
+                  0.8%
+                </span>
               </div>
             </div>
-
-            <div class="chart">
-              <div class="bar" style="height: 35%;"></div>
-              <div class="bar" style="height: 52%;"></div>
-              <div class="bar" style="height: 44%;"></div>
+            <div class="mini-chart" aria-hidden="true">
+              <div class="bar" style="height: 32%;"></div>
+              <div class="bar" style="height: 48%;"></div>
+              <div class="bar" style="height: 40%;"></div>
+              <div class="bar" style="height: 64%;"></div>
+              <div class="bar" style="height: 56%;"></div>
+              <div class="bar" style="height: 78%;"></div>
               <div class="bar" style="height: 70%;"></div>
-              <div class="bar" style="height: 61%;"></div>
-              <div class="bar" style="height: 86%;"></div>
-              <div class="bar" style="height: 74%;"></div>
-              <div class="bar" style="height: 96%;"></div>
+              <div class="bar" style="height: 92%;"></div>
             </div>
           </div>
         </div>
-
       </div>
     </section>
 
-    <section id="features" class="section-light">
+    <!-- Product Value -->
+    <section id="product" class="section-surface">
       <div class="container">
-
-        <div class="section-heading">
-          <h2>Everything sellers need to understand their business</h2>
+        <div class="section-heading" data-animate>
+          <h2>See the profit behind every order.</h2>
           <p>
-            Clear reporting tools designed to turn complex store data
-            into useful business information.
+            Sales alone do not show whether a business is truly profitable. REMAI connects operational
+            and financial data to reveal the real result behind each order, product and shop.
           </p>
         </div>
 
-        <div class="feature-grid">
-
-          <article class="feature-card">
-            <div class="feature-icon">₱</div>
-            <h3>Profit Tracking</h3>
-            <p>
-              Compare estimated profit with actual finance settlements
-              and understand store profitability.
-            </p>
+        <div class="card-grid-3">
+          <article class="card" data-animate>
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+            </div>
+            <h3>True Profit Visibility</h3>
+            <p>Understand revenue, costs, platform deductions, advertising spend and refunds in one place.</p>
           </article>
 
-          <article class="feature-card">
-            <div class="feature-icon">↔</div>
-            <h3>Finance Reconciliation</h3>
-            <p>
-              Match TikTok Shop finance transactions with orders and
-              settlement records.
-            </p>
+          <article class="card" data-animate>
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/>
+              </svg>
+            </div>
+            <h3>Faster Decisions</h3>
+            <p>Identify margin pressure, abnormal costs and underperforming products before they become larger problems.</p>
           </article>
 
-          <article class="feature-card">
-            <div class="feature-icon">▦</div>
-            <h3>SKU Cost Management</h3>
-            <p>
-              Maintain product costs by SKU and calculate estimated
-              gross profit automatically.
-            </p>
+          <article class="card" data-animate>
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 3 3 8l9 5 9-5-9-5Z"/>
+                <path d="M3 12l9 5 9-5"/>
+                <path d="M3 16l9 5 9-5"/>
+              </svg>
+            </div>
+            <h3>Unified Operations</h3>
+            <p>Bring multiple shops and critical performance indicators into one consistent operating view.</p>
           </article>
-
-          <article class="feature-card">
-            <div class="feature-icon">⌂</div>
-            <h3>Multi-store Analytics</h3>
-            <p>
-              Review performance across multiple authorized TikTok Shop
-              stores from one platform.
-            </p>
-          </article>
-
         </div>
       </div>
     </section>
 
-    <section id="product">
-      <div class="container product-grid">
-
-        <div class="product-content">
-          <div class="tag">REMAI Profit Tracker</div>
-
-          <h2>One dashboard for estimated and settled profit</h2>
-
-          <p>
-            REMAI Profit Tracker combines order, product-cost and finance
-            information so sellers can see both expected profit before
-            settlement and actual profit after settlement.
-          </p>
-
-          <div class="check-list">
-            <div class="check-item">
-              <span class="check">✓</span>
-              Actual settled operating profit
-            </div>
-
-            <div class="check-item">
-              <span class="check">✓</span>
-              Estimated profit for shipped orders
-            </div>
-
-            <div class="check-item">
-              <span class="check">✓</span>
-              SKU cost and margin analysis
-            </div>
-
-            <div class="check-item">
-              <span class="check">✓</span>
-              Finance and order matching
-            </div>
-
-            <div class="check-item">
-              <span class="check">✓</span>
-              Store performance overview
-            </div>
-          </div>
+    <!-- Core Capabilities -->
+    <section id="features" class="section-tint">
+      <div class="container">
+        <div class="section-heading" data-animate>
+          <h2>Everything that affects profit, connected.</h2>
         </div>
 
-        <div class="product-panel">
-          <h3>Platform Capabilities</h3>
+        <div class="card-grid-4">
+          <article class="card" data-animate>
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M6 2h12v20l-3-2-3 2-3-2-3 2V2Z"/>
+                <path d="M9 8h6M9 12h6"/>
+              </svg>
+            </div>
+            <h3>Order Profit Analysis</h3>
+            <p>Analyze profitability at order level instead of relying only on total sales.</p>
+          </article>
 
-          <div class="panel-row">
-            <span>Order synchronization</span>
-            <strong>Available</strong>
-          </div>
+          <article class="card" data-animate>
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 7h13M13 3l4 4-4 4"/>
+                <path d="M20 17H7M11 21l-4-4 4-4"/>
+              </svg>
+            </div>
+            <h3>Settlement Intelligence</h3>
+            <p>Compare estimated and completed settlements with clear financial visibility.</p>
+          </article>
 
-          <div class="panel-row">
-            <span>Finance synchronization</span>
-            <strong>Available</strong>
-          </div>
+          <article class="card" data-animate>
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M19 5 5 19"/>
+                <circle cx="7" cy="7" r="2.5"/>
+                <circle cx="17" cy="17" r="2.5"/>
+              </svg>
+            </div>
+            <h3>Platform Fee Analysis</h3>
+            <p>Understand platform deductions and how they affect margin.</p>
+          </article>
 
-          <div class="panel-row">
-            <span>Settlement reconciliation</span>
-            <strong>Available</strong>
-          </div>
+          <article class="card" data-animate>
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="8" r="3.5"/>
+                <path d="M5 20a7 7 0 0 1 14 0"/>
+              </svg>
+            </div>
+            <h3>Creator Commission Analysis</h3>
+            <p>Track creator-related commission separately from other platform charges.</p>
+          </article>
 
-          <div class="panel-row">
-            <span>SKU cost tracking</span>
-            <strong>Available</strong>
-          </div>
+          <article class="card" data-animate>
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 10v4h4l6 4V6l-6 4H3Z"/>
+                <path d="M17 9a4 4 0 0 1 0 6"/>
+              </svg>
+            </div>
+            <h3>Advertising Profitability</h3>
+            <p>Connect advertising spend with sales and product-level profit performance.</p>
+          </article>
 
-          <div class="panel-row">
-            <span>Multi-store support</span>
-            <strong>In Development</strong>
-          </div>
+          <article class="card" data-animate>
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M20 12 12 20 4 12V4h8l8 8Z"/>
+                <circle cx="9" cy="7" r="1.5" fill="currentColor" stroke="none"/>
+              </svg>
+            </div>
+            <h3>Product Cost Management</h3>
+            <p>Maintain cost records and improve the accuracy of profit calculation.</p>
+          </article>
+
+          <article class="card" data-animate>
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 12a9 9 0 1 0 3-6.7"/>
+                <path d="M3 3v5h5"/>
+              </svg>
+            </div>
+            <h3>Refund and Cancellation Analysis</h3>
+            <p>Monitor cancellations, returns, refunds and post-shipment loss.</p>
+          </article>
+
+          <article class="card" data-animate>
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="3" y="3" width="7" height="7" rx="1.5"/>
+                <rect x="14" y="3" width="7" height="7" rx="1.5"/>
+                <rect x="3" y="14" width="7" height="7" rx="1.5"/>
+                <rect x="14" y="14" width="7" height="7" rx="1.5"/>
+              </svg>
+            </div>
+            <h3>Multi-Shop Intelligence</h3>
+            <p>View multiple e-commerce shops from one unified operating dashboard.</p>
+          </article>
         </div>
-
       </div>
     </section>
 
-    <section id="about" class="section-light">
-      <div class="container about">
-        <div class="tag">About REMAI</div>
+    <!-- How REMAI Works -->
+    <section id="how-it-works" class="section-surface">
+      <div class="container">
+        <div class="section-heading" data-animate>
+          <h2>From commerce data to operating decisions.</h2>
+        </div>
 
-        <h2>Analytics software built for modern commerce</h2>
+        <div class="flow">
+          <div class="flow-step" data-animate>
+            <div class="flow-node">1</div>
+            <h4>Commerce Platforms</h4>
+            <p>Orders and store activity originate from connected commerce platforms.</p>
+          </div>
+          <div class="flow-connector" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+          </div>
+          <div class="flow-step" data-animate>
+            <div class="flow-node">2</div>
+            <h4>Orders and Finance</h4>
+            <p>Order records are matched against settlement and finance transactions.</p>
+          </div>
+          <div class="flow-connector" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+          </div>
+          <div class="flow-step" data-animate>
+            <div class="flow-node">3</div>
+            <h4>Costs and Advertising</h4>
+            <p>Product costs and advertising spend are layered on top of each order.</p>
+          </div>
+          <div class="flow-connector" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+          </div>
+          <div class="flow-step is-core" data-animate>
+            <div class="flow-node">4</div>
+            <h4>REMAI Profit Engine</h4>
+            <p>All inputs are reconciled into a single, consistent profit calculation.</p>
+          </div>
+          <div class="flow-connector" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+          </div>
+          <div class="flow-step" data-animate>
+            <div class="flow-node">5</div>
+            <h4>Actionable Insights</h4>
+            <p>Teams see clear, order-level profit signals to guide daily decisions.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <p>
-          REMAI Analytics develops data and reporting solutions for
-          e-commerce businesses. Our goal is to help sellers understand
-          revenue, product costs, finance settlements and profitability
-          through simple and reliable software.
+    <!-- Product Preview -->
+    <section id="preview" class="section-tint">
+      <div class="container">
+        <div class="section-heading" data-animate>
+          <h2>Designed for daily profit decisions.</h2>
+          <p>A closer look at the REMAI HQ profit intelligence platform.</p>
+        </div>
+
+        <div class="preview-shell" data-animate>
+          <div class="preview-sidebar">
+            <div class="preview-sidebar-item is-active">Overview</div>
+            <div class="preview-sidebar-item">Profit Orders</div>
+            <div class="preview-sidebar-item">Finance</div>
+            <div class="preview-sidebar-item">Advertising</div>
+            <div class="preview-sidebar-item">Products</div>
+            <div class="preview-sidebar-item">Refunds</div>
+            <div class="preview-sidebar-item">Reports</div>
+          </div>
+
+          <div class="preview-main">
+            <div class="preview-toolbar">
+              <span class="preview-chip">Shop: All Shops</span>
+              <span class="preview-chip">Date Range: Last 30 Days</span>
+              <span class="preview-chip">Currency: PHP</span>
+            </div>
+
+            <div class="preview-grid">
+              <div class="preview-health">
+                <div class="preview-health-ring" aria-hidden="true"><span>78</span></div>
+                <div>
+                  <div class="preview-health-label">Profit Health Index</div>
+                  <div class="preview-health-value">Strong — sample data</div>
+                </div>
+              </div>
+
+              <div class="preview-tile">
+                <div class="metric-label">Net Profit</div>
+                <div class="metric-value">₱128,420</div>
+              </div>
+              <div class="preview-tile">
+                <div class="metric-label">Profit Margin</div>
+                <div class="metric-value">26.4%</div>
+              </div>
+              <div class="preview-tile">
+                <div class="metric-label">Platform Fee Ratio</div>
+                <div class="metric-value">9.9%</div>
+                <div class="sparkline" aria-hidden="true">
+                  <svg viewBox="0 0 60 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-success);">
+                    <polyline points="1,6 13,9 25,7 37,12 49,14 59,17"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="preview-tile">
+                <div class="metric-label">Creator Commission Ratio</div>
+                <div class="metric-value">5.4%</div>
+                <div class="sparkline" aria-hidden="true">
+                  <svg viewBox="0 0 60 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-text-muted);">
+                    <polyline points="1,12 13,10 25,13 37,9 49,11 59,8"/>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="preview-tile span-2">
+                <div class="metric-label">Advertising Cost Trend</div>
+                <div class="mini-chart" aria-hidden="true">
+                  <div class="bar" style="height: 40%;"></div>
+                  <div class="bar" style="height: 55%;"></div>
+                  <div class="bar" style="height: 35%;"></div>
+                  <div class="bar" style="height: 60%;"></div>
+                  <div class="bar" style="height: 48%;"></div>
+                  <div class="bar" style="height: 66%;"></div>
+                </div>
+              </div>
+              <div class="preview-tile span-2">
+                <div class="metric-label">Refund Trend</div>
+                <div class="mini-chart" aria-hidden="true">
+                  <div class="bar" style="height: 70%;"></div>
+                  <div class="bar" style="height: 62%;"></div>
+                  <div class="bar" style="height: 58%;"></div>
+                  <div class="bar" style="height: 46%;"></div>
+                  <div class="bar" style="height: 38%;"></div>
+                  <div class="bar" style="height: 30%;"></div>
+                </div>
+              </div>
+              <div class="preview-tile">
+                <div class="metric-label">Cancellation Rate</div>
+                <div class="metric-value">2.1%</div>
+              </div>
+              <div class="preview-tile">
+                <div class="metric-label">Refund Rate</div>
+                <div class="metric-value">3.8%</div>
+              </div>
+            </div>
+
+            <div class="preview-table-wrap">
+              <div class="preview-table-title">Recent Profit Orders — sample data</div>
+              <table class="preview-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Order</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Net Profit</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>#TT-58210</td>
+                    <td>Wireless Earbuds Case</td>
+                    <td>₱482</td>
+                    <td><span class="status-pill is-good">Profitable</span></td>
+                  </tr>
+                  <tr>
+                    <td>#TT-58204</td>
+                    <td>Phone Stand Mini</td>
+                    <td>₱96</td>
+                    <td><span class="status-pill is-warn">Low Margin</span></td>
+                  </tr>
+                  <tr>
+                    <td>#TT-58197</td>
+                    <td>Screen Protector 3-Pack</td>
+                    <td>-₱54</td>
+                    <td><span class="status-pill is-bad">At Loss</span></td>
+                  </tr>
+                  <tr>
+                    <td>#TT-58185</td>
+                    <td>USB-C Cable 2m</td>
+                    <td>₱210</td>
+                    <td><span class="status-pill is-good">Profitable</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <p class="preview-caption">A unified view helps teams move from reporting to action. All figures shown are illustrative sample data.</p>
+      </div>
+    </section>
+
+    <!-- Built for Modern Commerce -->
+    <section id="platforms" class="section-surface section-tight">
+      <div class="container">
+        <div class="section-heading" data-animate>
+          <h2>Built for modern commerce operations.</h2>
+        </div>
+
+        <div class="platform-row" data-animate>
+          <span class="platform-badge">TikTok Shop</span>
+          <span class="platform-badge">Shopee</span>
+          <span class="platform-badge">Lazada</span>
+          <span class="platform-badge">Amazon <span class="future">Future support</span></span>
+          <span class="platform-badge">Shopify <span class="future">Future support</span></span>
+        </div>
+
+        <p class="centered-copy">
+          REMAI is being designed to support multi-platform e-commerce operations while maintaining
+          consistent profit logic across shops and channels.
         </p>
       </div>
     </section>
 
-    <section id="contact">
+    <!-- Security -->
+    <section id="security" class="section-tint">
       <div class="container">
-        <div class="contact-box">
-          <h2>Build a clearer view of your business</h2>
+        <div class="section-heading" data-animate>
+          <h2>Built with responsible data access in mind.</h2>
+        </div>
 
+        <div class="card-grid-2">
+          <article class="card" data-animate>
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="8" cy="15" r="4"/>
+                <path d="M11 12 20 3M17 6l3 3M14 9l2 2"/>
+              </svg>
+            </div>
+            <h3>Authorized Access</h3>
+            <p>REMAI is designed to access business data only after the relevant account owner grants authorization.</p>
+          </article>
+
+          <article class="card" data-animate>
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M7 2h8l4 4v16H7V2Z"/>
+                <path d="M10 14l2 2 4-5"/>
+              </svg>
+            </div>
+            <h3>Purpose-Limited Data Use</h3>
+            <p>Operational data is used to provide analytics, reconciliation and profit intelligence features.</p>
+          </article>
+
+          <article class="card" data-animate>
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="5" y="11" width="14" height="9" rx="2"/>
+                <path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+              </svg>
+            </div>
+            <h3>Secure Credentials</h3>
+            <p>Sensitive credentials and access tokens should be stored securely and must never be exposed in client-side website code.</p>
+          </article>
+
+          <article class="card" data-animate>
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M4 6h10M4 12h16M4 18h10"/>
+                <circle cx="17" cy="6" r="2"/>
+                <circle cx="8" cy="18" r="2"/>
+              </svg>
+            </div>
+            <h3>User Control</h3>
+            <p>Authorized businesses should be able to manage connections and revoke access through the relevant platform controls.</p>
+          </article>
+        </div>
+
+        <div class="disclaimer-box">
           <p>
-            For product information, business inquiries or support,
-            contact the REMAI Analytics team.
+            REMAI HQ is an independent software provider and is not affiliated with, endorsed by or
+            officially connected to TikTok, ByteDance or other commerce platforms mentioned on this website.
           </p>
+        </div>
+      </div>
+    </section>
 
-          <a
-            href="mailto:remaianalytics@gmail.com"
-            class="button"
-          >
-            remaianalytics@gmail.com
-          </a>
+    <!-- About -->
+    <section id="about" class="section-surface section-tight">
+      <div class="container">
+        <div class="section-heading" data-animate>
+          <h2>About REMAI HQ</h2>
+        </div>
+
+        <div class="about-copy" data-animate>
+          <p>
+            REMAI HQ is an independent software initiative focused on profit intelligence and business
+            analytics for e-commerce operations.
+          </p>
+          <p>
+            Our goal is to help commerce teams move beyond sales reporting and understand the complete
+            financial outcome of orders, products, advertising and platform activity.
+          </p>
+          <p>
+            REMAI HQ is currently developing internal tools and platform integrations to improve
+            operating visibility, financial reconciliation and profitability decisions.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section id="contact" class="section-tint">
+      <div class="container">
+        <div class="cta-box" data-animate>
+          <h2>Let's build more profitable commerce operations.</h2>
+          <p>For product, integration or business inquiries, contact the REMAI HQ development team.</p>
+          <div class="cta-actions">
+            <a href="mailto:developer@remaihq.com" class="btn btn-primary">Contact REMAI HQ</a>
+            <a href="mailto:developer@remaihq.com" class="cta-email">developer@remaihq.com</a>
+          </div>
         </div>
       </div>
     </section>
 
   </main>
 
-  <footer>
-    <div class="container footer-grid">
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand-word">
+            <span class="brand-mark" aria-hidden="true"><span>R</span></span>
+            <span><span class="brand-word-remai">REMAI</span> <span class="brand-word-hq">HQ</span></span>
+          </div>
+          <div class="footer-tagline">Make Every Order Profitable.<br>Profit Intelligence for Modern Commerce.</div>
+          <a href="mailto:developer@remaihq.com" class="footer-email">developer@remaihq.com</a>
+        </div>
 
-      <div>
-        <div class="footer-brand">REMAI Analytics</div>
-        <div>© 2026 REMAI Analytics. All rights reserved.</div>
+        <div>
+          <div class="footer-col-title">Company</div>
+          <nav class="footer-col-links" aria-label="Company">
+            <a href="#about">About REMAI HQ</a>
+            <a href="#contact">Contact</a>
+          </nav>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Product</div>
+          <nav class="footer-col-links" aria-label="Product">
+            <a href="#features">Features</a>
+            <a href="#how-it-works">How It Works</a>
+            <a href="#preview">Product Preview</a>
+          </nav>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Resources</div>
+          <nav class="footer-col-links" aria-label="Resources">
+            <a href="#security">Security</a>
+            <a href="#platforms">Supported Platforms</a>
+          </nav>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Legal</div>
+          <nav class="footer-col-links" aria-label="Legal">
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+          </nav>
+        </div>
       </div>
 
-      <div class="footer-links">
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Service</a>
-        <a href="#contact">Contact</a>
+      <div class="footer-bottom">
+        <p>&copy; <span data-current-year>2026</span> REMAI HQ. All rights reserved.</p>
+        <p>REMAI HQ is an independent software provider and is not affiliated with TikTok, ByteDance or other commerce platforms referenced on this website.</p>
       </div>
-
     </div>
   </footer>
 
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
